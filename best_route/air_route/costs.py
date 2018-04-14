@@ -19,25 +19,22 @@ xchange_dict = Exchange().make_dict()
 itinerary  = ['DUB','SXF','LHR','CPH','NYO']
 
 all_costs = {}
-temp_dict = {}
 key_value = 1
 for i in itinerary:
-    ports = ()
+    ports = []
     for j in itinerary:
         if i == j:
             continue
-        ports = (i,j)
-        temp_dict[key_value] = ports
-        all_costs[ports] = None
+        ports = [i,j]
+        all_costs[key_value] = ports
         key_value+=1      
-      
-for prime_key in temp_dict:
-    #print(all_costs[prime_key][0])
+
+for prime_key in all_costs:
               
     for key, value in airport_dict.items():
-        if key == temp_dict[prime_key][0]:
+        if key == all_costs[prime_key][0]:
             info1 = value
-        if key == temp_dict[prime_key][1]:
+        if key == all_costs[prime_key][1]:
             info2 = value
                 
     for key, value in currency_dict.items():
@@ -56,11 +53,8 @@ for prime_key in temp_dict:
         
     #print("Distance:", route1)
     cost = route1 * float(rate1)
-    for key in all_costs:
-        all_costs[key] = round(cost,2)
-        
-    #final_dict[key_value] = ports
-    print("Fuel cost:", round(cost,2))
+    all_costs[prime_key].append(round(cost,2))   
+    #print("Fuel cost:", round(cost,2))
 print(all_costs)
 #print(temp_dict)
    
