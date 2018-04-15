@@ -48,7 +48,7 @@ class Shortest_path():
             #print("New start:", start)
             if len(self.visited) > 5:
                 break
-            
+           
         return self.visited, self.sub_total
 
 

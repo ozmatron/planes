@@ -14,29 +14,27 @@ from air_route.Currency import Currency
 from air_route.Exchange_rate import Exchange
 
 class Costs(Airport, Airport_atlas, Currency, Exchange):
-
-    all_costs = {}
-    key_value = 1
+    
+    cache = {}
     airport_dict = Airport().make_dict()
     currency_dict = Currency().make_dict()
     xchange_dict = Exchange().make_dict()
     
     def __init__(self, itinerary):
-        self.itinerary = itinerary       
+        self.itinerary = itinerary
+        self.all_costs = {}      
     #itinerary  = ['DUB','SXF','LHR','CPH','NYO']
     
     def find_costs(self):
         for i in self.itinerary:
-            ports = []
             for j in self.itinerary:
                 if i == j:
                     continue
-                ports = [i,j]
-                self.all_costs[self.key_value] = ports
-                self.key_value+=1      
+                ports_value = [i,j]
+                ports_key = (i,j)
+                self.all_costs[ports_key] = ports_value      
         
-        for prime_key in self.all_costs:
-                      
+        for prime_key in self.all_costs:                  
             for key, value in self.airport_dict.items():
                 if key == self.all_costs[prime_key][0]:
                     info1 = value
@@ -62,11 +60,13 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
             cost = route1 * float(rate1)
             self.all_costs[prime_key].append(round(cost,2))   
             #print("Fuel cost:", round(cost,2))
+        self.cache.update(self.all_costs)
         return self.all_costs
         #print(temp_dict)
-           
-        # print(Currency().make_dict())
-        # print(Exchange().make_dict())
+        
+    
+    def __str__(self):
+        return 'Current cache: {}'.format(self.cache)
 
 
 
