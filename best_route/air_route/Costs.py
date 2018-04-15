@@ -33,36 +33,43 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
                 ports_value = [i,j]
                 ports_key = (i,j)
                 self.all_costs[ports_key] = ports_value      
-        
-        for prime_key in self.all_costs:                  
-            for key, value in self.airport_dict.items():
-                if key == self.all_costs[prime_key][0]:
-                    info1 = value
-                if key == self.all_costs[prime_key][1]:
-                    info2 = value
-                        
-            for key, value in self.currency_dict.items():
-                if key == info1['country']:
-                    currency1 = value
-                if key == info2['country']:
-                    currency2 = value
+     
+        for key in self.all_costs.keys():
+            #See if it's in cache
+            if key in self.cache.keys():
+                the_value = self.cache.get(key)
+                self.all_costs[key].append(the_value[2])
+            #Find it in the csv docs then
+            else:
+                for prime_key in self.all_costs:                  
+                    for key, value in self.airport_dict.items():
+                        if key == self.all_costs[prime_key][0]:
+                            info1 = value
+                        if key == self.all_costs[prime_key][1]:
+                            info2 = value
+                                 
+                    for key, value in self.currency_dict.items():
+                        if key == info1['country']:
+                            currency1 = value
+                        if key == info2['country']:
+                            currency2 = value
+                              
+                    for key, value in self.xchange_dict.items():
+                        if key == currency1:
+                            rate1 = value
+                        if key == currency2:
+                            rate2 = value
                      
-            for key, value in self.xchange_dict.items():
-                if key == currency1:
-                    rate1 = value
-                if key == currency2:
-                    rate2 = value
-            
-            #print(info1) 
-            route1 = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
-                
-            #print("Distance:", route1)
-            cost = route1 * float(rate1)
-            self.all_costs[prime_key].append(round(cost,2))   
-            #print("Fuel cost:", round(cost,2))
-        self.cache.update(self.all_costs)
-        return self.all_costs
-        #print(temp_dict)
+                    #print(info1) 
+                    route1 = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
+                         
+                    #print("Distance:", route1)
+                    cost = route1 * float(rate1)
+                    self.all_costs[prime_key].append(round(cost,2))   
+                    #print("Fuel cost:", round(cost,2))
+                self.cache.update(self.all_costs)
+            return self.all_costs
+                #print(temp_dict)
         
     
     def __str__(self):

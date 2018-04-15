@@ -6,12 +6,11 @@ Created on 23 Mar 2018
 
 class Shortest_path():
     
-    visited = []
-    sub_total = 0
-    
     def __init__(self, graph, itinerary):
         self.graph = graph
         self.itinerary = itinerary
+        self.visited = []
+        self.sub_total = 0
 #graph = {1: ['DUB', 'SXF', 1328.27], 2: ['DUB', 'LHR', 448.89], 3: ['DUB', 'CPH', 1241.54], 4: ['DUB', 'NYO', 1546.53], 5: ['SXF', 'DUB', 1328.27], 6: ['SXF', 'LHR', 962.55], 7: ['SXF', 'CPH', 364.46], 8: ['SXF', 'NYO', 743.53], 9: ['LHR', 'DUB', 629.75], 10: ['LHR', 'SXF', 1350.36], 11: ['LHR', 'CPH', 1373.66], 12: ['LHR', 'NYO', 1914.54], 13: ['CPH', 'DUB', 166.37], 14: ['CPH', 'SXF', 48.84], 15: ['CPH', 'LHR', 131.21], 16: ['CPH', 'NYO', 58.39], 17: ['NYO', 'DUB', 169.04], 18: ['NYO', 'SXF', 81.27], 19: ['NYO', 'LHR', 149.16], 20: ['NYO', 'CPH', 47.63]}
 
     def the_path(self):
