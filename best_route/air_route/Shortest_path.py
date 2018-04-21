@@ -3,6 +3,7 @@ Created on 23 Mar 2018
 
 @author: ozmatron
 '''
+import collections
 
 class Shortest_path():
     
@@ -16,39 +17,43 @@ class Shortest_path():
     def the_path(self):
         #itinerary  = ['DUB','SXF','LHR','CPH','NYO']
         limit = len(self.itinerary)
-        start = 'DUB'
+        start = self.itinerary[0]
         
-        while len(self.visited) < limit:
-            current_cost_dict = {}
-            for key, value in self.graph.items():
-                if self.graph[key][0] not in self.visited and self.graph[key][1] not in self.visited and self.graph[key][0] == start:
-                    current_cost = self.graph[key][2]
-                    next_hop = self.graph[key][1]
-                    current_cost_dict[next_hop] = current_cost;
-            
-            self.visited.append(start)
-            #print("the dict", current_cost_dict)
-            # Adapted from: https://www.w3resource.com/python-exercises/dictionary/python-data-type-dictionary-exercise-15.php
-            best_hop = min(current_cost_dict.keys(), key=(lambda k: current_cost_dict[k]))
-            best_price = current_cost_dict[best_hop]
-            #print(best_hop)
-            start = best_hop
-            self.sub_total += best_price
-            current_cost_dict.clear()
-            if len(self.visited) == limit - 1:
-                self.visited.append(start)
-                for key, value in self.graph.items():
-                    if self.graph[key][0] == start and self.graph[key][1] == 'DUB':
-                        last_cost = self.graph[key][2]
-                        #print(last_cost)
-                        self.sub_total += last_cost
-                        self.visited.append('DUB')
-            #print("New total:", sub_total)
-            #print("New start:", start)
-            if len(self.visited) > 5:
-                break
-           
-        return self.visited, self.sub_total
+        for key, value in self.graph.items():
+            if isinstance(self.graph[key][2], str):
+                return self.graph[key][2]
+            else:      
+                while len(self.visited) < limit:
+                    current_cost_dict = {}
+                    for key, value in self.graph.items():
+                        if self.graph[key][0] not in self.visited and self.graph[key][1] not in self.visited and self.graph[key][0] == start:
+                            current_cost = self.graph[key][2]
+                            next_hop = self.graph[key][1]
+                            current_cost_dict[next_hop] = current_cost;
+                    
+                    self.visited.append(start)
+                    #print("the dict", current_cost_dict)
+                    # Adapted from: https://www.w3resource.com/python-exercises/dictionary/python-data-type-dictionary-exercise-15.php
+                    best_hop = min(current_cost_dict.keys(), key=(lambda k: current_cost_dict[k]))
+                    best_price = current_cost_dict[best_hop]
+                    #print(best_hop)
+                    start = best_hop
+                    self.sub_total += best_price
+                    current_cost_dict.clear()
+                    if len(self.visited) == limit - 1:
+                        self.visited.append(start)
+                        for key, value in self.graph.items():
+                            if self.graph[key][0] == start and self.graph[key][1] == self.itinerary[0]:
+                                last_cost = self.graph[key][2]
+                                #print(last_cost)
+                                self.sub_total += last_cost
+                                self.visited.append(self.itinerary[0])
+                    #print("New total:", sub_total)
+                    #print("New start:", start)
+                    if len(self.visited) > 5:
+                        break
+                   
+                return self.visited, self.sub_total
 
 
 

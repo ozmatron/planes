@@ -11,7 +11,7 @@ from Exchange_rate import Exchange
 airport_dict = Airport().make_dict()
 currency_dict = Currency().make_dict()
 xchange_dict = Exchange().make_dict()
-itinerary  = ['DUB','SXF','LHR','CPH','NYO']
+itinerary  = ['LHR','DUB','SXF','CPH','NYO']
 
 for key, value in airport_dict.items():
     if key == itinerary[0]:
@@ -30,9 +30,14 @@ for key, value in xchange_dict.items():
         rate1 = value
     if key == currency2:
         rate2 = value
-    
+print(info1['lat'])
+print(info1['long'])
+print(info2['lat'])
+print(info2['long'])
+
+
 route1 = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
     
 print("Distance:", route1)
 cost = route1 * float(rate1)
-print("Fuel cost(€):", round(cost,2))
+print("Fuel cost(€):", cost)

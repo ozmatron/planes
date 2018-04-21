@@ -12,6 +12,7 @@ from air_route.Airport import Airport
 from air_route.Airport_atlas import Airport_atlas
 from air_route.Currency import Currency
 from air_route.Exchange_rate import Exchange
+import collections
 
 class Costs(Airport, Airport_atlas, Currency, Exchange):
     
@@ -20,8 +21,9 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
     currency_dict = Currency().make_dict()
     xchange_dict = Exchange().make_dict()
     
-    def __init__(self, itinerary):
+    def __init__(self, itinerary, range):
         self.itinerary = itinerary
+        self.range = range
         self.all_costs = {}      
     #itinerary  = ['DUB','SXF','LHR','CPH','NYO']
     
@@ -61,11 +63,13 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
                             rate2 = value
                      
                     #print(info1) 
-                    route1 = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
-                         
-                    #print("Distance:", route1)
-                    cost = route1 * float(rate1)
-                    self.all_costs[prime_key].append(round(cost,2))   
+                    route = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
+                    if route > self.range:
+                        self.all_costs[prime_key].append("Cannot make the distance, get a bigger plane!") 
+                    else:
+                    #print("Distance:", route)
+                        cost = route * float(rate1)
+                        self.all_costs[prime_key].append(round(cost,2))   
                     #print("Fuel cost:", round(cost,2))
                 self.cache.update(self.all_costs)
             return self.all_costs
