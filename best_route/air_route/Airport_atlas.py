@@ -24,7 +24,6 @@ class Airport_atlas():
         phi1 = (90 - self.lat1) * (2*pi) / 360
         phi2 = (90 - self.lat2) * (2*pi) / 360
         distance = acos(sin(phi1) * sin(phi2) * cos(theta1 - theta2) + cos(phi1) * cos(phi2)) * self.radius_earth
-        #distance = acos(sin(self.lat1) * sin(self.lat2) + cos(self.lat1) * cos(self.lat2) * cos(self.long2-self.long1)) * self.radius_earth
         rounded_distance = round(distance, 2)
         return rounded_distance
     

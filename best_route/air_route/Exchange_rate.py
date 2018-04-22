@@ -13,5 +13,5 @@ class Exchange:
         with open('/Users/ozmatron/Desktop/Algo/currencyrates.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)
             for row in reader:
-                self.xchange_dict[row[1]] = row[2]
+                self.xchange_dict[row[1]] = row[3]
         return self.xchange_dict

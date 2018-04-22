@@ -28,6 +28,7 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
     #itinerary  = ['DUB','SXF','LHR','CPH','NYO']
     
     def find_costs(self):
+        viable = True
         for i in self.itinerary:
             for j in self.itinerary:
                 if i == j:
@@ -61,19 +62,18 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
                             rate1 = value
                         if key == currency2:
                             rate2 = value
-                     
-                    #print(info1) 
+                      
                     route = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
                     if route > self.range:
-                        self.all_costs[prime_key].append("Cannot make the distance, get a bigger plane!") 
+                        self.all_costs[prime_key].append("Too far!") 
                     else:
-                    #print("Distance:", route)
                         cost = route * float(rate1)
                         self.all_costs[prime_key].append(round(cost,2))   
-                    #print("Fuel cost:", round(cost,2))
                 self.cache.update(self.all_costs)
-            return self.all_costs
-                #print(temp_dict)
+                for key, value in self.all_costs.items():
+                    if isinstance(self.all_costs[key][2], str):
+                        viable = False
+            return self.all_costs, viable
         
     
     def __str__(self):
