@@ -25,10 +25,8 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
         self.itinerary = itinerary
         self.range = range
         self.all_costs = {}      
-    #itinerary  = ['DUB','SXF','LHR','CPH','NYO']
     
     def find_costs(self):
-        viable = True
         for i in self.itinerary:
             for j in self.itinerary:
                 if i == j:
@@ -70,16 +68,9 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
                         cost = route * float(rate1)
                         self.all_costs[prime_key].append(round(cost,2))   
                 self.cache.update(self.all_costs)
-                for key, value in self.all_costs.items():
-                    if isinstance(self.all_costs[key][2], str):
-                        viable = False
-            return self.all_costs, viable
+            return self.all_costs
         
     
     def __str__(self):
         return 'Current cache: {}'.format(self.cache)
-
-
-
-
 

@@ -17,18 +17,18 @@ class Shortest_path():
         limit = len(self.itinerary)
         start = self.itinerary[0]
         
-        for key, value in self.graph.items():
-            if isinstance(self.graph[key][2], str):
-                return self.graph[key][2]
-            else:      
-                while len(self.visited) < limit:
-                    current_cost_dict = {}
-                    for key, value in self.graph.items():
-                        if self.graph[key][0] not in self.visited and self.graph[key][1] not in self.visited and self.graph[key][0] == start:
-                            current_cost = self.graph[key][2]
+        for key, value in self.graph.items():     
+            while len(self.visited) < limit:
+                current_cost_dict = {}
+                for key, value in self.graph.items():
+                    if self.graph[key][0] not in self.visited and self.graph[key][1] not in self.visited and self.graph[key][0] == start:
+                        current_cost = self.graph[key][2]
+                        if isinstance(current_cost, float):
                             next_hop = self.graph[key][1]
-                            current_cost_dict[next_hop] = current_cost;
-                    
+                            current_cost_dict[next_hop] = current_cost
+                if current_cost_dict == {}:
+                    self.visited.appendleft('Too far!')
+                else:           
                     self.visited.append(start)
                     # Adapted from: https://www.w3resource.com/python-exercises/dictionary/python-data-type-dictionary-exercise-15.php
                     best_hop = min(current_cost_dict.keys(), key=(lambda k: current_cost_dict[k]))
@@ -45,8 +45,8 @@ class Shortest_path():
                                 self.visited.append(self.itinerary[0])
                     if len(self.visited) > limit:
                         break
-                   
-                return self.visited, self.sub_total
+               
+            return self.visited, self.sub_total
 
 
 
