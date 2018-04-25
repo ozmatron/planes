@@ -65,7 +65,7 @@ class Costs(Airport, Airport_atlas, Currency, Exchange):
                     if route > self.range:
                         self.all_costs[prime_key].append("Too far!") 
                     else:
-                        cost = route * float(rate1)
+                        cost = route / float(rate1)
                         self.all_costs[prime_key].append(round(cost,2))   
                 self.cache.update(self.all_costs)
             return self.all_costs

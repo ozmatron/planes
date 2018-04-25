@@ -43,8 +43,8 @@ class Shortest_path():
                                 last_cost = self.graph[key][2]
                                 self.sub_total += last_cost
                                 self.visited.append(self.itinerary[0])
-                    if len(self.visited) > limit:
-                        break
+                    #if len(self.visited) > limit:
+                        #break
                
             return self.visited, self.sub_total
 
