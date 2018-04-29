@@ -9,7 +9,8 @@ class Currency:
     
     def __init__(self):
         self.currency_dict = {}
-        
+    
+    """Make a dictionary of required currency info"""    
     def make_dict(self):
         with open('/Users/ozmatron/Desktop/Algo/countrycurrency.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)

@@ -17,7 +17,8 @@ class Airport_atlas():
         self.lat2 = lat2
         self.long1 = long1
         self.long2 = long2
-
+    
+    """Calculate distance between two airports""" 
     def find_distance(self):
         theta1 = self.long1 * (2 * pi) / 360
         theta2 = self.long2 * (2 * pi) / 360

@@ -8,7 +8,8 @@ import csv
 class Exchange:
     def __init__(self):
         self.xchange_dict = {}
-        
+    
+    """Make a dictionary of required exchange rate info"""    
     def make_dict(self):
         with open('/Users/ozmatron/Desktop/Algo/currencyrates.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)
