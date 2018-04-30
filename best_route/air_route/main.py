@@ -7,8 +7,7 @@ from air_route.Costs import Costs
 from air_route.Aircraft import Aircraft
 from air_route.Shortest_path import Shortest_path
 import csv
-import sys
-print(sys.version)
+
 try:
     with open('test.csv', newline='') as file:
         reader = csv.reader(file)
