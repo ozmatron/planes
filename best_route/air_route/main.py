@@ -37,5 +37,5 @@ try:
     
                 writing_file.close()
 except Exception:
-     print("Make sure your CSV input only includes IATA codes for airports and aircraft!")
+    print("Make sure your CSV input only includes IATA codes for airports and aircraft!")
 
