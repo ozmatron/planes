@@ -13,7 +13,7 @@ class Aircraft:
     
     """Find the range of aircraft, return it in km"""    
     def find_range(self):
-        with open('/Users/ozmatron/Desktop/Algo/aircraft.csv', 'r', encoding='utf8') as f:
+        with open('aircraft.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row[0] == self.aircraft:

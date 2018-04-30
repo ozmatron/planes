@@ -8,6 +8,7 @@ from air_route.Airport import Airport
 from air_route.Airport_atlas import Airport_atlas
 from air_route.Currency import Currency
 from air_route.Exchange_rate import Exchange
+from air_route.Aircraft import Aircraft
 
 class Testing(unittest.TestCase):
     
@@ -47,4 +48,9 @@ class Testing(unittest.TestCase):
                 
         self.route1 = Airport_atlas(info1['lat'], info1['long'], info2['lat'], info2['long']).find_distance()
         self.cost = self.route1 * float(rate1)
-        self.assertEqual(self.cost,629.747781)
+        self.assertEqual(self.cost,320.05857)
+        
+    def test_range(self):
+        self.aircraft = '747'
+        self.range = Aircraft(self.aircraft).find_range()
+        self.assertEqual(self.range,15680.0)

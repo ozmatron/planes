@@ -12,7 +12,6 @@ from air_route.Airport import Airport
 from air_route.Airport_atlas import Airport_atlas
 from air_route.Currency import Currency
 from air_route.Exchange_rate import Exchange
-import collections
 
 class Costs(Airport, Airport_atlas, Currency, Exchange):
     

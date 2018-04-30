@@ -11,7 +11,7 @@ class Exchange:
     
     """Make a dictionary of required exchange rate info"""    
     def make_dict(self):
-        with open('/Users/ozmatron/Desktop/Algo/currencyrates.csv', 'r', encoding='utf8') as f:
+        with open('currencyrates.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)
             for row in reader:
                 self.xchange_dict[row[1]] = row[3]
