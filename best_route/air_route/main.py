@@ -3,9 +3,9 @@ Created on 21 Apr 2018
 
 @author: ozmatron
 '''
-from air_route.Costs import Costs
-from air_route.Aircraft import Aircraft
-from air_route.Shortest_path import Shortest_path
+from Costs import Costs
+from Aircraft import Aircraft
+from Shortest_path import Shortest_path
 import csv
 
 try:

@@ -8,10 +8,10 @@ Created on 23 Mar 2018
 
 @author: ozmatron
 '''
-from air_route.Airport import Airport
-from air_route.Airport_atlas import Airport_atlas
-from air_route.Currency import Currency
-from air_route.Exchange_rate import Exchange
+from Airport import Airport
+from Airport_atlas import Airport_atlas
+from Currency import Currency
+from Exchange_rate import Exchange
 
 class Costs(Airport, Airport_atlas, Currency, Exchange):
     

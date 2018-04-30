@@ -3,7 +3,6 @@ Created on 23 Mar 2018
 
 @author: ozmatron
 '''
-import collections
 from itertools import permutations
 
 class Shortest_path():

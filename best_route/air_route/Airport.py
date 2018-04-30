@@ -12,7 +12,7 @@ class Airport:
     
     """Make a dictionary of required airport info"""     
     def make_dict(self):
-        with open('/Users/ozmatron/Desktop/Algo/airport.csv', 'r', encoding='utf8') as f:
+        with open('airport.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)
             for row in reader:
                 self.airport_dict[row[4]] = {}
